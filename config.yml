@@ -1,0 +1,83 @@
+---
+
+# tasks for Final-Exam
+
+- name: Stop firewall service on all servers
+  hosts: all
+  tasks:
+    - name: Stop ufw on ubuntu
+      systemd:
+        name: ufw
+        state: stopped
+        enabled: no
+        #        when: ansible_distribution == 'Debian'
+
+
+- hosts: install_git
+  tasks:
+    - name: Install git on Debian
+      include_role:
+        name: install-git_debian
+        #        when: ansible_distribution == 'Debian'
+
+
+# Clone your prelim exam repository
+- hosts: git_clone
+  tasks:
+    - name: Clone prelim-exam repository on Debian
+      include_role:
+        name: git_clone
+
+- hosts: install_docker
+  tasks:
+    - name: Install docker on Debian
+      include_role:
+        name: install-docker-debian
+#        when: ansible_distribution == 'Debian'
+
+
+## Install and configure one enterprise service that can be installed in Debian
+# via Docker Containerization
+- hosts: httpd
+  tasks:
+    - name: Install httpd in a docker containerization
+      include_role:
+        name: install-httpd-docker
+
+# Install and configure one monitoring tool that can be installed in Debian        
+# via Docker Containerization
+- hosts: elasticstack
+  tasks:
+    - name: Install ElasticStack in a docker containerization
+      include_role:
+        name: install-ElasticStack-docker
+
+# Change Motd as "Ansible Managed by <username>"      
+- hosts: motd
+  tasks:
+    - name: Change Motd on Debian
+      include_role:
+        name: motd      
+
+## Install and configure one enterprise service that can be installed in Debian
+# via Ansible Playbook
+- hosts: enterprise_service
+  tasks:
+    - name: Install and Configure Apache2 on Debian
+      include_role:
+        name: apache2_debian
+#        when: ansible_distribution == 'Debian'
+
+
+
+# Install and configure one monitoring tool that can be installed in Debian        
+# via Ansible Playbook
+- hosts: nagios
+  tasks:
+    - name: Install and Configure Nagios Core on Debian
+      include_role:
+        name: nagios_debian
+        #        when: ansible_distribution == 'Debian'
+
+
+      

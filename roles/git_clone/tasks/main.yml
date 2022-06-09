@@ -1,0 +1,11 @@
+---
+# tasks file for git_clone
+
+
+
+- name: Clone prelim-exam repository
+  git:
+    repo: 'https://github.com/jkvcombo-tip/combo_PrelimExamm.git'
+    dest: /srv/checkout
+#   version: prelim-exam
+    clone: yes

@@ -1,0 +1,11 @@
+---
+# tasks file for motd
+
+
+
+
+- name: Change Motd
+  copy:
+    dest: /etc/motd
+    content: |
+      Ansible Managed by jkvcombo-tip
